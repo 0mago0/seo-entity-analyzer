@@ -15,7 +15,13 @@
 
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbxhI_5n5lRjAfb15VYjNG5OeyPj-RiaQWOIy6qR5GUd8NybN6caGyUhf74_Lk7OvzEw/exec";
+    const SUPABASE_URL = "https://pjyjzqjvjotijmugoza.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_niskReqm_Nt6m29TfXs4Ag_lp-N13Jw";
 
+    const supabase = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+      );
     async function analyze() {
       const keyword = document.getElementById("keyword").value;
       const result = document.getElementById("result");
