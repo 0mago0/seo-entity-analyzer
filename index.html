@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>SEO Entity Analyzer</title>
-  
 </head>
 <body>
   <h1>SEO Entity Analyzer</h1>
@@ -15,9 +14,6 @@
 
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbxhI_5n5lRjAfb15VYjNG5OeyPj-RiaQWOIy6qR5GUd8NybN6caGyUhf74_Lk7OvzEw/exec";
-    
-
-
 
     async function analyze() {
       const keyword = document.getElementById("keyword").value;
@@ -34,16 +30,8 @@
         const res = await fetch(API_URL + "?keyword=" + encodeURIComponent(keyword));
         const text = await res.text();
 
-        const { error } = await supabaseClient
-          .from("search_logs")
-          .insert([{ keyword: keyword }]);
-
-        if (error) {
-          result.innerText = "Supabase 錯誤：" + error.message;
-          return;
-        }
-
         result.innerText = "完成：" + text;
+
       } catch (error) {
         result.innerText = "錯誤：" + error.message;
       }
