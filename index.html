@@ -18,10 +18,11 @@
     const SUPABASE_URL = "https://pjyjzqjvjotijmugoza.supabase.co";
     const SUPABASE_KEY = "sb_publishable_niskReqm_Nt6m29TfXs4Ag_lp-N13Jw";
 
-    const supabase = window.supabase.createClient(
+    const supabaseClient = window.supabase.createClient(
       SUPABASE_URL,
       SUPABASE_KEY
-      );
+    );
+
     async function analyze() {
       const keyword = document.getElementById("keyword").value;
       const result = document.getElementById("result");
@@ -33,20 +34,23 @@
 
       result.innerText = "分析中...";
 
-try {
-  const res = await fetch(API_URL + "?keyword=" + encodeURIComponent(keyword));
-  const text = await res.text();
+      try {
+        const res = await fetch(API_URL + "?keyword=" + encodeURIComponent(keyword));
+        const text = await res.text();
 
-  
-  await supabase.from("search_logs").insert([
-    { keyword: keyword }
-  ]);
+        const { error } = await supabaseClient
+          .from("search_logs")
+          .insert([{ keyword: keyword }]);
 
-  result.innerText = "完成：" + text;
+        if (error) {
+          result.innerText = "Supabase 錯誤：" + error.message;
+          return;
+        }
 
-} catch (error) {
-  result.innerText = "錯誤：" + error.message;
-}
+        result.innerText = "完成：" + text;
+      } catch (error) {
+        result.innerText = "錯誤：" + error.message;
+      }
     }
   </script>
 </body>
