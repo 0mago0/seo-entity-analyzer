@@ -37,7 +37,7 @@ try {
   const res = await fetch(API_URL + "?keyword=" + encodeURIComponent(keyword));
   const text = await res.text();
 
-  // 🔥 加這段（寫入 Supabase）
+  
   await supabase.from("search_logs").insert([
     { keyword: keyword }
   ]);
