@@ -33,14 +33,20 @@
 
       result.innerText = "分析中...";
 
-      try {
-        const res = await fetch(API_URL + "?keyword=" + encodeURIComponent(keyword));
-        const text = await res.text();
+try {
+  const res = await fetch(API_URL + "?keyword=" + encodeURIComponent(keyword));
+  const text = await res.text();
 
-        result.innerText = "完成：" + text;
-      } catch (error) {
-        result.innerText = "錯誤：" + error.message;
-      }
+  // 🔥 加這段（寫入 Supabase）
+  await supabase.from("search_logs").insert([
+    { keyword: keyword }
+  ]);
+
+  result.innerText = "完成：" + text;
+
+} catch (error) {
+  result.innerText = "錯誤：" + error.message;
+}
     }
   </script>
 </body>
