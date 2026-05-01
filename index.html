@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <title>SEO Entity Analyzer</title>
+</head>
+<body>
+  <h1>SEO Entity Analyzer</h1>
+
+  <input id="keyword" placeholder="請輸入關鍵字，例如 4G吃到飽" />
+  <button onclick="analyze()">開始分析</button>
+
+  <p id="result"></p>
+
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbxhI_5n5lRjAfb15VYjNG5OeyPj-RiaQWOIy6qR5GUd8NybN6caGyUhf74_Lk7OvzEw/exec";
+
+    async function analyze() {
+      const keyword = document.getElementById("keyword").value;
+      const result = document.getElementById("result");
+
+      if (!keyword) {
+        result.innerText = "請先輸入關鍵字";
+        return;
+      }
+
+      result.innerText = "分析中...";
+
+      try {
+        const res = await fetch(API_URL + "?keyword=" + encodeURIComponent(keyword));
+        const text = await res.text();
+
+        result.innerText = "完成：" + text;
+      } catch (error) {
+        result.innerText = "錯誤：" + error.message;
+      }
+    }
+  </script>
+</body>
+</html>
