@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>SEO Entity Analyzer</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
 </head>
 <body>
   <h1>SEO Entity Analyzer</h1>
@@ -15,13 +15,9 @@
 
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbxhI_5n5lRjAfb15VYjNG5OeyPj-RiaQWOIy6qR5GUd8NybN6caGyUhf74_Lk7OvzEw/exec";
-    const SUPABASE_URL = "https://pjyjzqjvjotijmugoza.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_niskReqm_Nt6m29TfXs4Ag_lp-N13Jw";
+    
 
-    const supabaseClient = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+
 
     async function analyze() {
       const keyword = document.getElementById("keyword").value;
